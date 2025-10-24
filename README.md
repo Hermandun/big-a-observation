@@ -1,19 +1,6 @@
 # A股观察室 - 实时智能分析系统
 
-<div align="center">
-
-![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.50.0-FF4B4B.svg)
-![DeepSeek](https://img.shields.io/badge/AI-DeepSeek-green.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
-
-**基于 Python + Streamlit + DeepSeek AI 的 A股实时新闻分析和投资推荐系统**
-
-[功能特性](#-核心功能) | [快速开始](#-快速开始) | [部署指南](#-部署到-github-copilot-spaces)
-
-</div>
-
----
+基于 Python + Streamlit + DeepSeek AI 的 A股实时新闻分析和投资推荐系统。
 
 ## 🎯 核心功能
 
@@ -47,29 +34,47 @@ Big A Observation/
 
 ## 🚀 快速开始
 
-### 1. 安装依赖
+### 1. 克隆项目
 
 ```bash
-cd "/Users/herman/Desktop/Dev/Big A Observation"
-source .venv/bin/activate
+git clone https://github.com/hermandun/big-a-observation.git
+cd big-a-observation
+```
+
+### 2. 配置环境
+
+```bash
+# 创建虚拟环境
+python3 -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+# .venv\Scripts\activate   # Windows
+
+# 安装依赖
 pip install -r requirements.txt
+
+# 配置环境变量
+cp .env.example .env
+# 编辑 .env 文件，填入你的 DeepSeek API Key
 ```
 
-### 2. 启动应用
+### 3. 启动应用
 
+**方式一：使用启动脚本（推荐）**
 ```bash
-streamlit run src/streamlit_app.py --server.address=0.0.0.0 --server.port=8501
+./run.sh
 ```
 
-### 3. 访问应用
+**方式二：手动启动**
+```bash
+streamlit run src/streamlit_app.py
+```
+
+### 4. 访问应用
 
 - **本地访问**：http://localhost:8501
-- **局域网访问**：http://192.168.31.51:8501
-
-### 4. 登录
-
-- **用户名**：`admin`
-- **密码**：`admin123`
+- **登录账号**：
+  - 用户名：`admin`
+  - 密码：`admin123`
 
 ## 🧪 测试
 
@@ -98,10 +103,49 @@ python test_flow.py
 ## 🔧 技术栈
 
 - **前端框架**：Streamlit 1.50.0
-- **AI模型**：DeepSeek-R1 (via SiliconFlow API)
+- **AI模型**：DeepSeek-V3 (一级分析) + DeepSeek-R1 (二级分析)
 - **数据源**：新浪财经 7x24 API + AkShare
 - **数据库**：SQLite 3
 - **身份验证**：Passlib (bcrypt)
+
+## 🎨 混合模式架构
+
+系统采用智能混合模式，兼顾速度与质量：
+
+- **一级分析**：DeepSeek-V3 快速模型（5-10秒）
+  - 持续监控新闻流
+  - 快速判断影响
+  - 不阻塞后续分析
+
+- **二级分析**：DeepSeek-R1 推理模型（30-120秒）
+  - 深度分析有影响新闻
+  - 队列化处理
+  - 高质量股票推荐
+
+详见 [HYBRID_MODE_GUIDE.md](./HYBRID_MODE_GUIDE.md)
+
+## ⚙️ 配置说明
+
+### 环境变量 (.env)
+
+```env
+# DeepSeek API 配置（必填）
+DEEPSEEK_API_KEY=your-api-key-here
+DEEPSEEK_API_URL=https://api.siliconflow.cn/v1
+
+# 数据库配置（可选，默认使用SQLite）
+MONGO_URL=mongodb://localhost:27017
+MONGO_DB=stock_analysis
+
+# JWT 密钥（可选）
+JWT_SECRET=your-secret-key-here
+```
+
+### 获取 DeepSeek API Key
+
+1. 访问 [SiliconFlow](https://siliconflow.cn/)
+2. 注册并获取 API Key
+3. 将 Key 填入 `.env` 文件
 
 ## 🔄 当前状态
 
@@ -116,85 +160,6 @@ python test_flow.py
 
 ---
 
-## 🌐 部署到 GitHub Copilot Spaces
-
-### 方法 1: 通过 GitHub Web 界面
-
-1. **创建 GitHub 仓库**
-   - 访问 https://github.com/new
-   - 仓库名：`big-a-observation`
-   - 设置为 Public 或 Private
-
-2. **推送代码**
-   ```bash
-   cd "/Users/herman/Desktop/Dev/Big A Observation"
-   git init
-   git add .
-   git commit -m "Initial commit: A股观察室"
-   git branch -M main
-   git remote add origin https://github.com/你的用户名/big-a-observation.git
-   git push -u origin main
-   ```
-
-3. **部署到 Copilot Spaces**
-   - 访问 https://github.com/copilot/spaces
-   - 点击 "New Space"
-   - 选择你的仓库 `big-a-observation`
-   - 配置 Secrets:
-     - 名称: `DEEPSEEK_API_KEY`
-     - 值: 你的 DeepSeek API Key
-   - 点击 "Deploy"
-
-### 方法 2: 使用命令行
-
-```bash
-# 1. 安装 GitHub CLI (如果未安装)
-brew install gh  # macOS
-
-# 2. 登录 GitHub
-gh auth login
-
-# 3. 创建仓库并推送
-cd "/Users/herman/Desktop/Dev/Big A Observation"
-git init
-git add .
-git commit -m "Initial commit"
-gh repo create big-a-observation --public --source=. --remote=origin --push
-
-# 4. 配置 Secret
-gh secret set DEEPSEEK_API_KEY
-
-# 5. 部署到 Copilot Spaces (需要通过 Web 界面)
-```
-
-## 🔐 环境变量配置
-
-在 GitHub Copilot Spaces 中需要配置以下 Secret：
-
-| 变量名 | 说明 | 示例值 |
-|--------|------|--------|
-| `DEEPSEEK_API_KEY` | DeepSeek API密钥 | `sk-xxx...` |
-
-## 📊 混合模式架构
-
-详见 [HYBRID_MODE_GUIDE.md](HYBRID_MODE_GUIDE.md)
-
-### 性能优势
-
-- **一级分析**: V3快速模型（5-10秒） - 持续监控
-- **二级分析**: R1推理模型（30-120秒） - 深度分析
-- **10分钟覆盖**: 60条一级分析 + 后台R1深度推荐
-
----
-
-<div align="center">
-
-**最后更新**：2025-01-24  
-**版本**：v0.2.0  
+**最后更新**：2025-10-24  
+**版本**：v1.0  
 **状态**：✅ 生产就绪
-
-Made with ❤️ by A股观察室团队
-
-**如果这个项目对你有帮助，请给个 ⭐ Star！**
-
-</div>
