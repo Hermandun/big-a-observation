@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "big-a-observation"
+version = "0.1.0"
+description = "A股实时分析系统"
+authors = ["Your Name <your.email@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.104.0"
+uvicorn = "^0.23.2"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-multipart = "^0.0.6"
+motor = "^3.3.1"
+akshare = "^1.11.22"
+aiohttp = "^3.8.6"
+python-dotenv = "^1.0.0"
+requests = "^2.31.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.4.3"
+black = "^23.10.0"
+isort = "^5.12.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

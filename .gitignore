@@ -1,0 +1,81 @@
+# .gitignore for A股观察室项目
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables
+.env
+.env.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+stock_analysis.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+streamlit.log
+
+# Test files
+test_*.py
+*_test.py
+
+# Temporary files
+*.tmp
+*.bak
+temp/
+tmp/
+
+# Frontend build
+frontend/node_modules/
+frontend/dist/
+
+# Poetry
+poetry.lock
+
+# Pytest
+.pytest_cache/
+.coverage
+
+# Jupyter
+.ipynb_checkpoints/
+
+# MacOS
+._*

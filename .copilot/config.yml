@@ -1,0 +1,37 @@
+# GitHub Copilot Space Configuration
+name: big-a-observation
+title: A股观察室 - 实时分析系统
+description: 基于DeepSeek AI的A股实时新闻分析与股票推荐系统
+
+# Runtime configuration
+runtime: python
+python_version: "3.9"
+
+# Application settings
+app:
+  type: streamlit
+  entry_point: src/streamlit_app.py
+  port: 8501
+
+# Environment variables (public)
+env:
+  DEEPSEEK_API_URL: https://api.siliconflow.cn/v1
+
+# Secrets (to be configured in GitHub UI)
+secrets:
+  - DEEPSEEK_API_KEY
+
+# Resources
+resources:
+  memory: 2Gi
+  cpu: 1
+
+# Health check
+health_check:
+  path: /
+  port: 8501
+  initial_delay_seconds: 30
+  period_seconds: 10
+
+# Auto-restart on failure
+restart_policy: always

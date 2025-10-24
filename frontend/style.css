@@ -1,0 +1,56 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.news-item {
+    border-left: 4px solid #007bff;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+
+.impact-high {
+    border-left-color: #dc3545;
+}
+
+.impact-medium {
+    border-left-color: #ffc107;
+}
+
+.impact-low {
+    border-left-color: #28a745;
+}
+
+.stock-recommendation {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.stock-code {
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.stock-action {
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8em;
+}
+
+.action-buy {
+    background-color: #28a745;
+}
+
+.action-sell {
+    background-color: #dc3545;
+}
+
+.action-hold {
+    background-color: #ffc107;
+}
