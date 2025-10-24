@@ -1,0 +1,30 @@
+# 核心依赖
+streamlit==1.50.0
+streamlit-autorefresh==1.0.1
+
+# API 调用
+requests==2.32.5
+aiohttp==3.13.1
+
+# 数据处理
+pandas==2.3.3
+numpy==2.0.2
+
+# A股数据
+akshare==1.17.71
+
+# 身份验证
+passlib==1.7.4
+bcrypt==5.0.0
+
+# 配置
+python-dotenv==1.1.1
+
+# 数据库（可选）
+SQLAlchemy==2.0.44
+
+# 其他必要依赖
+beautifulsoup4==4.14.2
+lxml==6.0.2
+python-dateutil==2.9.0.post0
+pytz==2025.2
